@@ -1,0 +1,109 @@
+
+POST http://localhost:3055/api/register
+Content-Type: application/json
+
+{
+    "role":"Super Admin",
+    "username":"admin",
+    "password":"admin"
+
+}
+
+###
+
+
+POST http://localhost:3055/api/register
+Content-Type: application/json
+
+{
+    "role":"Contributor",
+    "username":"contributor",
+    "password":"contributor"
+
+}
+
+###
+
+
+POST http://localhost:3055/api/register
+Content-Type: application/json
+
+{
+    "role":"Consumer",
+    "username":"Consumer",
+    "password":"Consumer"
+
+}
+
+###
+
+
+POST http://localhost:3055/question/admin
+Content-Type: application/json
+
+{
+
+    "qTitle": "My first question",
+    "qText":"i am just wondering what time it is tbh",
+    "qCategory":"Random"
+
+
+}
+
+###
+
+
+POST http://localhost:3055/question/contributor
+Content-Type: application/json
+
+{
+
+    "qTitle": "My second question",
+    "qText":"i am just wondering what time it is tbh",
+    "qCategory":"Snow"
+
+
+}
+
+###
+
+
+POST http://localhost:3055/question/2/answer/admin
+Content-Type: application/json
+
+{
+
+
+    "answerText":"Snow is white"
+
+
+}
+
+###
+
+
+POST http://localhost:3055/question/2/answer/contributor
+Content-Type: application/json
+
+{
+
+
+    "answerText":"Why are you talking about snow, you should answer the question."
+
+
+}
+
+###
+
+
+
+GET http://localhost:3055/question/1/
+Content-Type: application/json
+
+{
+
+
+
+}
+
+###

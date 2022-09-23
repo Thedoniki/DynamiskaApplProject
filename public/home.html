@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <!-- Bootstrap CSS -->
+      <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    
+    <div id="app">
+        <div v-if="currentLoggedInUser">
+            <section class="bg-light mb-4 shadow-small">
+              <div class="d-flex justify-content-start">
+                <div class="px-0 mb-0 userIsLoggedIn">
+                          <p>You are logged in as <b> {{ currentLoggedInUser }} </b></p>
+                      </div> 
+              </div>
+            </section>
+          </div>
+
+           <!-- Questions table -->
+
+        <div class="container-flow">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Text</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Username</th>
+                  </tr>
+              </thead>
+              <tbody v-for="question in questions" v-bind:key="question.qID">
+                  <tr>
+                      <th scope="row"> <button type="button" class="btn" data-toggle="modal"
+                              v-on:click="showProdInUpdateForm(product.id)">
+                          {{ question.qID }}</button></th>
+                      <td>{{ question.qTitle }}</td>
+                      <td>{{ question.qText }}</td>
+                      <td>{{ question.qCategory }} SEK</td>
+                      <td>{{ question.username }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div> <!-- Questionss table END -->
+
+       <!-- Update Modal -->
+       <div class="modal fade" id="updateModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formUpdate">
+                        <div class="form-group">
+                            <label for="qID">Id</label>
+                            <input type="text" class="form-control" name="updateId" id="updateId" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="qTitle">Title</label>
+                            <input type="text" class="form-control" name="updateTitle" id="updateTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="qText">Text</label>
+                            <input type="text" class="form-control" name="updateText" id="updateText">
+                        </div>
+                        <div class="form-group">
+                            <label for="qCategory">Category</label>
+                            <input type="text" class="form-control" name="updateCategory" id="updateCategory">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success float-right" value="Save changes"
+                                v-on:click="updateQuestion">
+
+                            <button type="submit" class="btn btn-danger float-left"
+                                v-on:click="deleteQuestion">Delete</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End update modal-->
+
+
+          <button
+          v-on:click="logOut"
+          style="background-color: #7aa8b7"
+        >
+          Logout
+        </button>
+    </div>
+
+
+
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <script src="app.js"></script>
+    <!-- <script>
+      const vm = new Vue({
+          el: "#app",
+          data: {
+              products: []
+          },
+          //methods for crud operations
+          methods: {
+              //Delete products
+              deleteQuestion() {
+                  var question = {
+                      id: $('#updateModal #updateId').val()
+                  }
+                  $.ajax({
+                      url: '/question/' + product.id,
+                      type: 'DELETE',
+                      success: () => {
+                          var self = this;
+                          $.getJSON("/questions/", function (jsondata) {
+                              console.log(JSON.stringify(jsondata));
+                              self.products = jsondata;
+                          });
+                      }
+                  });
+              },
+              updateqQuestion() {
+                  var question = {
+                      qID: $('#updateModal #updateId').val(),
+                      qTitle: $('#updateModal #updateTitle').val(),
+                      qText: $('#updateModal #updateText').val(),
+                      qCategpry: $('#updateModal #updatePrice').val(),
+                      qusername: $('#updateModal #updateId').val()
+                  }
+                  $.ajax({
+                      url: '/question/' + question.id,
+                      type: 'PUT',
+                      data: product,
+                      success: () => {
+                          var self = this;
+                          $.getJSON("/questions/", function (jsondata) {
+                              self.products = jsondata;
+                          });
+                      }
+                  });
+                  $('#updateModal').modal('hide');
+              },
+          },
+
+          mounted() {
+              var self = this;
+              $.getJSON("/questions/", function (jsondata) {
+                  console.log(JSON.stringify(jsondata));
+                  self.products = jsondata;
+              });
+          }
+      });
+  </script> -->
+</body>
+</html>
