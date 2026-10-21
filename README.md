@@ -101,6 +101,7 @@ Kopplingarna sker via kolumnerna `username` och `questionID`. Tabellerna har ing
 Klassdiagrammet visar hur serverns delar hänger ihop: routes anropar databasmodulerna, som i sin tur använder den delade databasanslutningen och lösenordsmodulen.
 
 ```mermaid
+%%{init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#E3F2FD', 'primaryTextColor': '#000', 'primaryBorderColor': '#1E88E5', 'lineColor': '#666', 'tertiaryColor': '#F5F5F5' }}}%%
 classDiagram
     direction LR
 
@@ -195,6 +196,8 @@ classDiagram
 ## ER-diagram
 
 ```mermaid
+%%{init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#FFF3E0', 'primaryBorderColor': '#FB8C00', 'lineColor': '#555' }}}%%
+
 erDiagram
     USERS {
         INTEGER id PK "AUTOINCREMENT"
